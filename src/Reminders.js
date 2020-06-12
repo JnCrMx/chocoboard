@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { TokenContext } from './token-context.js';
+import { MyContext } from './context.js';
 import Config from './config.js';
 
 class Reminder extends React.Component
@@ -15,7 +15,7 @@ class Reminder extends React.Component
                 method: 'post',
                 url: Config.apiUrl + '/reminders/cancel',
                 data: bodyFormData,
-                headers: {'Authorization': 'Bearer '+this.context}
+                headers: {'Authorization': 'Bearer '+this.context.token}
             })
             .then(res =>
             {
@@ -70,7 +70,7 @@ class Reminders extends React.Component
     {
         axios.get(Config.apiUrl + '/reminders/all?active='+this.state.active, 
         {
-            headers: {'Authorization': 'Bearer '+this.context}
+            headers: {'Authorization': 'Bearer '+this.context.token}
         })
         .then(res => {
             this.setState({reminders: res.data});
@@ -99,7 +99,7 @@ class Reminders extends React.Component
     }
 }
 
-Reminders.contextType = TokenContext;
-Reminder.contextType = TokenContext;
+Reminders.contextType = MyContext;
+Reminder.contextType = MyContext;
 
 export default Reminders;

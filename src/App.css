@@ -65,6 +65,12 @@ a {
 	align-items: center;
 }
 
+#guild-selector {
+	display: flex;
+	flex-direction: column-reverse;
+	height: 100%;
+}
+
 #page {
 	display: flex;
 	position: absolute;

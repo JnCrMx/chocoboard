@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { TokenContext } from './token-context.js';
+import { MyContext } from './context.js';
 import Config from './config.js';
 
 class GuildInfo extends React.Component
@@ -14,9 +14,9 @@ class GuildInfo extends React.Component
 
     componentDidMount()
     {
-        axios.get(Config.apiUrl + '/guild/info', 
+        axios.get(Config.apiUrl + '/'+this.context.guild+'/guild/info', 
         {
-            headers: {'Authorization': 'Bearer '+this.context}
+            headers: {'Authorization': 'Bearer '+this.context.token}
         })
         .then(res => {
             this.setState({guild: res.data});
@@ -25,6 +25,11 @@ class GuildInfo extends React.Component
 
     render()
     {
+        if(!this.state.guild || !this.state.guild.owner)
+            return (null);
+
+        console.log(this.state.guild);
+
         return (
             <div className="dashboard-box">
                 <a href={'https://discord.com/channels/'+this.state.guild.guildId} target="_blank" rel="noopener noreferrer">
@@ -66,9 +71,9 @@ class UserInfo extends React.Component
 
     componentDidMount()
     {
-        axios.get(Config.apiUrl + '/user/self', 
+        axios.get(Config.apiUrl + '/'+this.context.guild+'/user/self', 
         {
-            headers: {'Authorization': 'Bearer '+this.context}
+            headers: {'Authorization': 'Bearer '+this.context.token}
         })
         .then(res => {
             this.setState({user: res.data});
@@ -77,6 +82,9 @@ class UserInfo extends React.Component
 
     render()
     {
+        if(!this.state.user)
+            return (null);
+
         return (
             <div className="dashboard-box">
                 <span className="dashboard-title">
@@ -131,7 +139,7 @@ class Dashboard extends React.Component
 }
 
 
-UserInfo.contextType = TokenContext;
-GuildInfo.contextType = TokenContext;
+UserInfo.contextType = MyContext;
+GuildInfo.contextType = MyContext;
 
 export default Dashboard;

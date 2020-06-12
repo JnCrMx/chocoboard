@@ -5,7 +5,7 @@ import { withCookies, Cookies } from 'react-cookie';
 import TokenLogin from './TokenLogin.js';
 import MainPage from './MainPage.js';
 
-import { TokenContext } from './token-context.js';
+import { MyContext } from './context.js';
 
 import './App.css';
 
@@ -21,7 +21,8 @@ class App extends React.Component
 		const { cookies } = props;
     	this.state = {
 			token: cookies.get('token') || null,
-			loggedIn: cookies.get('token')?true:false
+			loggedIn: cookies.get('token')?true:false,
+			guild: cookies.get('guild') || null
 		};
 	}
 
@@ -39,14 +40,21 @@ class App extends React.Component
 		this.setState({token: null, loggedIn: false});
 	}
 
+	setGuild = guild =>
+	{
+		const { cookies } = this.props;
+		cookies.set('guild', guild, { path: '/' });
+		this.setState({guild: guild});
+	}
+
 	Page = () =>
 	{
 		if(this.state.loggedIn)
 		{
 			return (
-				<TokenContext.Provider value={this.state.token}>
-					<MainPage logout={this.logout}/>
-				</TokenContext.Provider>
+				<MyContext.Provider value={{token: this.state.token, guild: this.state.guild, setGuild: this.setGuild}}>
+					<MainPage logout={this.logout} key={this.state.guild}/>
+				</MyContext.Provider>
 			);
 		}
 		else

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Chart from "react-apexcharts";
 
-import { TokenContext } from './token-context.js';
+import { MyContext } from './context.js';
 import Config from './config.js';
 
 class Poll extends React.Component
@@ -49,9 +49,9 @@ class Polls extends React.Component
 
     componentDidMount()
     {
-        axios.get(Config.apiUrl + '/polls/all', 
+        axios.get(Config.apiUrl + '/' + this.context.guild + '/polls/all', 
         {
-            headers: {'Authorization': 'Bearer '+this.context}
+            headers: {'Authorization': 'Bearer '+this.context.token}
         })
         .then(res => {
             this.setState({polls: res.data, pageCount: Math.ceil(res.data.length/3)});
@@ -87,6 +87,6 @@ class Polls extends React.Component
     }
 }
 
-Polls.contextType = TokenContext;
+Polls.contextType = MyContext;
 
 export default Polls;
