@@ -7,6 +7,7 @@ import Config from './config.js';
 import Dashboard from './Dashboard.js';
 import Reminders from './Reminders.js';
 import Polls from './Polls.js';
+import Shop from './Shop.js';
 import Members from './Members.js';
 import Settings from './Settings.js';
 
@@ -16,6 +17,7 @@ import polls from './polls.svg';
 import logout from './logout.svg';
 import members from './members.svg';
 import settings from './settings.svg';
+import shop from './shop.svg';
 
 class Menu extends React.Component
 {
@@ -155,7 +157,7 @@ class MainPage extends React.Component
         this.props.logout();
     }
 
-    updateMenu = () =>
+    updateUser = () =>
     {
         axios.get(Config.apiUrl + '/'+this.context.guild+'/user/self', 
         {
@@ -168,7 +170,7 @@ class MainPage extends React.Component
 
     componentDidMount()
     {
-        this.updateMenu();
+        this.updateUser();
     }
 
     render()
@@ -185,8 +187,11 @@ class MainPage extends React.Component
             case 'polls':
                 page = <Polls key={this.context.guild}/>
                 break;
+            case 'shop':
+                page = <Shop key={this.context.guild} user={this.state.user} updateUser={this.updateUser}/>
+                break;
             case 'members':
-                page = <Members key={this.context.guild}/>
+                page = <Members key={this.context.guild} user={this.state.user} updateUser={this.updateUser}/>
                 break;
             case 'settings':
                 page = <Settings key={this.context.guild}/>
@@ -197,6 +202,7 @@ class MainPage extends React.Component
         menuEntries.push(<MenuEntry key="dashboard" name="dashboard" title="Dashboard" icon={dashboard}/>);
         menuEntries.push(<MenuEntry key="reminders" name="reminders" title="Erinnerungen" icon={reminders}/>);
         menuEntries.push(<MenuEntry key="polls" name="polls" title="Umfragen" icon={polls}/>);
+        menuEntries.push(<MenuEntry key="shop" name="shop" title="Rollenshop" icon={shop}/>);
         if(this.state.user.operator)
         {
             menuEntries.push(<MenuEntry key="members" name="members" title="Mitglieder" icon={members}/>);
@@ -205,7 +211,7 @@ class MainPage extends React.Component
 
         return (
             <div id="main">
-                <Menu updatePage={this.updatePage} selection={this.state.currentPage} logout={this.logout} updateMenu={this.updateMenu}>
+                <Menu updatePage={this.updatePage} selection={this.state.currentPage} logout={this.logout} updateMenu={this.updateUser}>
                     {menuEntries}
                 </Menu>
                 <div id="page">

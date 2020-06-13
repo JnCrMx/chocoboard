@@ -96,6 +96,11 @@ class Members extends React.Component
         const updated = [...this.state.members];
         updated[index].coins = coins;
         this.setState({members: updated});
+
+        if(id === this.props.user.userId)
+        {
+            this.props.updateUser();
+        }
     }
 
     render()

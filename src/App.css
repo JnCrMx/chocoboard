@@ -289,3 +289,23 @@ a {
 .operator-entry > td {
 	padding: 10px;
 }
+
+.shop-buttons > button {
+	margin: 5px;
+}
+
+.shop-item-editor {
+	position: fixed;
+	display: none;
+	flex-direction: column;
+	left: 33vw;
+	top: 10vh;
+	height: max-content;
+	overflow-y: auto;
+	background-color: #505764;
+	padding: 10px;
+}
+
+.shop-item-editor-open {
+	display: flex;
+}

@@ -107,7 +107,7 @@ class UserInfo extends React.Component
                         <tr>
                             <td className="dashboard-table-key">Rolle</td>
                             <td className="dashboard-table-value">
-                                <span style={{color: "#"+(this.state.user.roleColor||0).toString(16)}}>{this.state.user.role}</span>
+                                <span style={{color: "#"+(this.state.user.roleColor||0).toString(16).padStart(6, '0')}}>{this.state.user.role}</span>
                             </td>
                         </tr>
                         <tr>
@@ -135,7 +135,6 @@ class Dashboard extends React.Component
         );
     }
 }
-
 
 UserInfo.contextType = MyContext;
 GuildInfo.contextType = MyContext;
