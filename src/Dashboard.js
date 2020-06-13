@@ -28,8 +28,6 @@ class GuildInfo extends React.Component
         if(!this.state.guild || !this.state.guild.owner)
             return (null);
 
-        console.log(this.state.guild);
-
         return (
             <div className="dashboard-box">
                 <a href={'https://discord.com/channels/'+this.state.guild.guildId} target="_blank" rel="noopener noreferrer">

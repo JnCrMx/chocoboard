@@ -40,11 +40,11 @@ class App extends React.Component
 		this.setState({token: null, loggedIn: false});
 	}
 
-	setGuild = guild =>
+	setGuild = (guild, then) =>
 	{
 		const { cookies } = this.props;
 		cookies.set('guild', guild, { path: '/' });
-		this.setState({guild: guild});
+		this.setState({guild: guild}, then);
 	}
 
 	Page = () =>
@@ -53,7 +53,7 @@ class App extends React.Component
 		{
 			return (
 				<MyContext.Provider value={{token: this.state.token, guild: this.state.guild, setGuild: this.setGuild}}>
-					<MainPage logout={this.logout} key={this.state.guild}/>
+					<MainPage logout={this.logout}/>
 				</MyContext.Provider>
 			);
 		}

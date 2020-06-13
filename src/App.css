@@ -19,9 +19,8 @@ a {
 }
 
 .menu {
-	position: fixed;
-	left: 0;
-	top: 0;
+	position: relative;
+	width: min-content;
 	background-color: darkorange;
 	height: 100vh;
 	display: flex;
@@ -30,17 +29,20 @@ a {
 
 .menuButton {
 	padding: 0;
+	padding-left: 1vw;
 	border: none;
 	background: none;
 	color: white;
 	font-size: 40px;
 	float: left;
-	width: 5vw;
-	height: 5vw;
+	width: min-content;
+	min-height: 3.5vw;
 }
 
 .menuEntry {
 	padding: 1vw;
+	padding-bottom: 1.5vh;
+	padding-top: 1.5vh;
 	display: flex;
 	flex-direction: row;
 	user-select: none;
@@ -63,21 +65,25 @@ a {
 	font-size: 25px;
 	display: flex;
 	align-items: center;
+	width: max-content;
 }
 
 #guild-selector {
 	display: flex;
 	flex-direction: column-reverse;
 	height: 100%;
+	width: min-content;
+}
+
+#main {
+	display: flex;
+	position: relative;
 }
 
 #page {
-	display: flex;
-	position: absolute;
-	right: 5vw;
-	top: 5vh;
-	width: 80vw;
-	height: 75vh;
+	margin: 1%;
+	width: 100%;
+	height: 95vh;
 }
 
 .dashboard {
@@ -136,7 +142,7 @@ a {
 
 .reminders {
 	width: inherit;
-	height: inherit;
+	height: 90%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -152,7 +158,7 @@ a {
 
 .polls {
 	width: inherit;
-	height: inherit;
+	height: 90%;
 	display: flex;
 	flex-direction: row;
 	overflow: auto;
@@ -171,10 +177,115 @@ a {
 
 .pie-chart {
 	position: absolute;
-	bottom: 10%;
+	bottom: 20%;
 }
 
 .poll-page-button {
 	margin-left: 5%;
 	margin-right: 5%;
+}
+
+#members {
+	display: flex;
+	flex-direction: column;
+	width: inherit;
+	height: inherit;
+}
+
+#members input {
+	margin-bottom: 1vh;
+}
+
+#members #table-div {
+	overflow-y: auto;
+	width: inherit;
+	height: 100%;
+}
+
+#members table {
+	border-spacing: 0;
+	width: 99%;
+}
+
+#members .member-buttons {
+	width: 100%;
+	display: flex;
+}
+
+#members .member-buttons * {
+	margin: 5px;
+}
+
+#members .member-buttons button {
+	font-size: 30px;
+	border: none;
+	background: none;
+	color: white;
+}
+
+#members .member-buttons input {
+	width: 100%;
+}
+
+.member td {
+	border: 1px solid white;
+	padding: 5px;
+}
+
+#settings {
+	width: inherit;
+	height: inherit;
+	display: flex;
+	flex-direction: row;
+}
+
+#settings > * {
+	margin: 10px;
+}
+
+#settings h2 {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.settings-select-button {
+	margin-left: 1vw;
+}
+
+.selector-channels {
+	position: fixed;
+	display: none;
+	flex-direction: column;
+	left: 33vw;
+	top: 10vh;
+	height: 50vh;
+	overflow-y: auto;
+	background-color: #505764;
+	padding: 10px;
+}
+
+.selector-channels-open {
+	display: flex;
+}
+
+.selector-channel {
+	text-align: left;
+	padding: 10px;
+	user-select: none;
+}
+
+.selector-channel:hover {
+	background-color: #6a7383;
+}
+
+.selector-channel-selected {
+	background-color: orange;
+}
+
+.delete-button {
+	color: red;
+}
+
+.operator-entry > td {
+	padding: 10px;
 }

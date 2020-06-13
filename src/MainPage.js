@@ -7,11 +7,15 @@ import Config from './config.js';
 import Dashboard from './Dashboard.js';
 import Reminders from './Reminders.js';
 import Polls from './Polls.js';
+import Members from './Members.js';
+import Settings from './Settings.js';
 
 import dashboard from './dashboard.svg';
 import reminders from './reminders.svg';
 import polls from './polls.svg';
 import logout from './logout.svg';
+import members from './members.svg';
+import settings from './settings.svg';
 
 class Menu extends React.Component
 {
@@ -31,10 +35,13 @@ class Menu extends React.Component
                 {
                     React.Children.map(this.props.children, child => 
                     {
+                        if(!child)
+                            return null;
+
                         return React.cloneElement(child, { extended: this.state.extended, updatePage: this.props.updatePage, selection: this.props.selection })
                     })
                 }
-                <GuildSelector extended={this.state.extended} logout={this.props.logout}/>
+                <GuildSelector extended={this.state.extended} logout={this.props.logout} updateMenu={this.props.updateMenu}/>
             </div>
         );
     }
@@ -47,7 +54,7 @@ class MenuEntry extends React.Component
         return (
             <div className={"menuEntry"+(this.props.selection===this.props.name?" menuEntrySelected":"")}
                     onClick={this.props.onClick||this.props.updatePage.bind(null, this.props.name)}>
-                <img src={this.props.icon} width="50vw" alt=""/>
+                <img src={this.props.icon} width="35w" alt=""/>
                 {this.props.extended?<div className="menuName">{this.props.title}</div>:null}
             </div>
         );
@@ -58,7 +65,7 @@ class GuildEntry extends React.Component
 {
     changeGuild = event =>
     {
-        this.context.setGuild(this.props.data.id);
+        this.context.setGuild(this.props.data.id, this.props.updateMenu);
         this.props.close();
     }
 
@@ -66,7 +73,7 @@ class GuildEntry extends React.Component
     {
         return (
             <div className="menuEntry" onClick={this.props.onClick||this.changeGuild}>
-                <img src={this.props.data.iconUrl} width="50vw" alt="?"/>
+                <img src={this.props.data.iconUrl} width="35vw" height="35vw" alt="?"/>
                 {this.props.extended?<div className="menuName">{this.props.data.name}</div>:null}
             </div>
         );
@@ -115,12 +122,13 @@ class GuildSelector extends React.Component
             <div id="guild-selector">
                 <GuildEntry data={(this.state.guilds||[]).filter(g => g.id === this.context.guild)[0]||{}} extended={this.props.extended} onClick={this.openClose}/>
                 {this.state.open ? 
-                    this.state.guilds.filter(g => g.id != this.context.guild).map(g => <GuildEntry data={g} extended={this.props.extended} close={this.closeSelector}/>)
+                    this.state.guilds.filter(g => g.id !== this.context.guild).map(g => 
+                        <GuildEntry data={g} extended={this.props.extended} close={this.closeSelector} updateMenu={this.props.updateMenu}/>)
                     :null
                 }
                 {this.state.open ?
                     <div className="menuEntry" onClick={this.props.logout}>
-                        <img src={logout} width="50vw"/>
+                        <img src={logout} width="35vw"/>
                         {this.props.extended?<div className="menuName">Abmelden</div>:null}
                     </div>
                     :null
@@ -133,7 +141,8 @@ class GuildSelector extends React.Component
 class MainPage extends React.Component
 {
     state = {
-        currentPage: 'dashboard'
+        currentPage: 'dashboard',
+        user: {}
     }
 
     updatePage = name =>
@@ -146,28 +155,58 @@ class MainPage extends React.Component
         this.props.logout();
     }
 
+    updateMenu = () =>
+    {
+        axios.get(Config.apiUrl + '/'+this.context.guild+'/user/self', 
+        {
+            headers: {'Authorization': 'Bearer '+this.context.token}
+        })
+        .then(res => {
+            this.setState({user: res.data});
+        });
+    }
+
+    componentDidMount()
+    {
+        this.updateMenu();
+    }
+
     render()
     {
         let page = null;
         switch(this.state.currentPage)
         {
             case 'dashboard':
-                page = <Dashboard/>
+                page = <Dashboard key={this.context.guild}/>
                 break;
             case 'reminders':
-                page = <Reminders/>
+                page = <Reminders key={this.context.guild}/>
                 break;
             case 'polls':
-                page = <Polls/>
+                page = <Polls key={this.context.guild}/>
                 break;
+            case 'members':
+                page = <Members key={this.context.guild}/>
+                break;
+            case 'settings':
+                page = <Settings key={this.context.guild}/>
+                break;
+        }
+
+        var menuEntries = [];
+        menuEntries.push(<MenuEntry key="dashboard" name="dashboard" title="Dashboard" icon={dashboard}/>);
+        menuEntries.push(<MenuEntry key="reminders" name="reminders" title="Erinnerungen" icon={reminders}/>);
+        menuEntries.push(<MenuEntry key="polls" name="polls" title="Umfragen" icon={polls}/>);
+        if(this.state.user.operator)
+        {
+            menuEntries.push(<MenuEntry key="members" name="members" title="Mitglieder" icon={members}/>);
+            menuEntries.push(<MenuEntry key="settings" name="settings" title="Einstellungen" icon={settings}/>);
         }
 
         return (
             <div id="main">
-                <Menu updatePage={this.updatePage} selection={this.state.currentPage} logout={this.logout}>
-                    <MenuEntry name="dashboard" title="Dashboard" icon={dashboard}/>
-                    <MenuEntry name="reminders" title="Erinnerungen" icon={reminders}/>
-                    <MenuEntry name="polls" title="Umfragen" icon={polls}/>
+                <Menu updatePage={this.updatePage} selection={this.state.currentPage} logout={this.logout} updateMenu={this.updateMenu}>
+                    {menuEntries}
                 </Menu>
                 <div id="page">
                     {this.context.guild?page:null}

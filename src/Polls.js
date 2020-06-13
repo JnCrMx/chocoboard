@@ -78,7 +78,7 @@ class Polls extends React.Component
                 <div className="polls">
                     {(this.state.polls||[]).slice(this.state.page * 3, (this.state.page + 1) * 3).map(v =>
                         {
-                            return <Poll data={v}/>;
+                            return <Poll data={v} key={v.id}/>;
                         })
                     }
                 </div>

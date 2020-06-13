@@ -87,7 +87,7 @@ class Reminders extends React.Component
         return (
             <div style={{width: 'inherit', height: 'inherit'}}>
                 <input type="checkbox" name="active" checked={this.state.active} onChange={this.updateActive}/>
-                <label for="active">nur aktive anzeigen</label>
+                <label htmlFor="active">nur aktive anzeigen</label>
                 <div className="reminders">
                     {(this.state.reminders||[]).map(v =>
                     {
