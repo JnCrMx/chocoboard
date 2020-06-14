@@ -71,8 +71,22 @@ a {
 #guild-selector {
 	display: flex;
 	flex-direction: column-reverse;
-	height: 100%;
-	width: min-content;
+	width: auto;
+	height: 50vh;
+	margin-top: auto;
+}
+
+.guild-entry {
+	z-index: 10;
+	background-color: darkorange;
+}
+
+.guild-selector-open > .guild-entry {
+	border-right: 3px solid white;
+}
+
+.guild-entry-top {
+	border-top: 3px solid white;
 }
 
 #main {

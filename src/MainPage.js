@@ -74,7 +74,7 @@ class GuildEntry extends React.Component
     render()
     {
         return (
-            <div className="menuEntry" onClick={this.props.onClick||this.changeGuild}>
+            <div className="menuEntry guild-entry" onClick={this.props.onClick||this.changeGuild}>
                 <img src={this.props.data.iconUrl} width="35vw" height="35vw" alt="?"/>
                 {this.props.extended?<div className="menuName">{this.props.data.name}</div>:null}
             </div>
@@ -121,7 +121,7 @@ class GuildSelector extends React.Component
     render()
     {
         return (
-            <div id="guild-selector">
+            <div id="guild-selector" className={this.state.open?"guild-selector-open":""}>
                 <GuildEntry data={(this.state.guilds||[]).filter(g => g.id === this.context.guild)[0]||{}} extended={this.props.extended} onClick={this.openClose}/>
                 {this.state.open ? 
                     this.state.guilds.filter(g => g.id !== this.context.guild).map(g => 
@@ -129,7 +129,7 @@ class GuildSelector extends React.Component
                     :null
                 }
                 {this.state.open ?
-                    <div className="menuEntry" onClick={this.props.logout}>
+                    <div className="menuEntry guild-entry guild-entry-top" onClick={this.props.logout}>
                         <img src={logout} width="35vw"/>
                         {this.props.extended?<div className="menuName">Abmelden</div>:null}
                     </div>
