@@ -168,9 +168,23 @@ class MainPage extends React.Component
         });
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot)
+    {
+        if(prevProps.guild !== this.props.guild)
+        {
+            if(this.context.guild)
+            {
+                this.updateUser();
+            }
+        }
+    }
+
     componentDidMount()
     {
-        this.updateUser();
+        if(this.context.guild)
+        {
+            this.updateUser();
+        }
     }
 
     render()

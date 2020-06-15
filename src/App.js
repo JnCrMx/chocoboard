@@ -36,7 +36,8 @@ class App extends React.Component
 	logout = () =>
 	{
 		const { cookies } = this.props;
-		cookies.remove('token');
+		cookies.remove('token', { path: '/' });
+		cookies.remove('guild', { path: '/' }); // remove the guild to prevent errros on login with different token
 		this.setState({token: null, loggedIn: false});
 	}
 
@@ -53,7 +54,7 @@ class App extends React.Component
 		{
 			return (
 				<MyContext.Provider value={{token: this.state.token, guild: this.state.guild, setGuild: this.setGuild}}>
-					<MainPage logout={this.logout}/>
+					<MainPage logout={this.logout} guild={this.state.guild}/>
 				</MyContext.Provider>
 			);
 		}
