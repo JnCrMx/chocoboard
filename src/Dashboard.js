@@ -63,57 +63,42 @@ class GuildInfo extends React.Component
 
 class UserInfo extends React.Component
 {
-    state = {
-        user: {}
-    }
-
-    componentDidMount()
-    {
-        axios.get(Config.apiUrl + '/'+this.context.guild+'/user/self', 
-        {
-            headers: {'Authorization': 'Bearer '+this.context.token}
-        })
-        .then(res => {
-            this.setState({user: res.data});
-        })
-    }
-
     render()
     {
-        if(!this.state.user)
+        if(!this.props.user)
             return (null);
 
         return (
             <div className="dashboard-box">
                 <span className="dashboard-title">
-                    <img src={this.state.user.avatarUrl} width="32" alt="Avatar"/>
-                    {this.state.user.tag}
-                    <span className={"online-status online-status-"+this.state.user.onlineStatus}>⬤</span>
+                    <img src={this.props.user.avatarUrl} width="32" alt="Avatar"/>
+                    {this.props.user.tag}
+                    <span className={"online-status online-status-"+this.props.user.onlineStatus}>⬤</span>
                 </span>
                 <table className="dashboard-table">
                     <tbody>
                         <tr>
                             <td className="dashboard-table-key">seit</td>
                             <td className="dashboard-table-value">
-                                {new Date(this.state.user.timeJoined*1000||0).toLocaleString()}
+                                {new Date(this.props.user.timeJoined*1000||0).toLocaleString()}
                             </td>
                         </tr>
                         <tr>
                             <td className="dashboard-table-key">Nick</td>
                             <td className="dashboard-table-value">
-                                {this.state.user.nickname}
+                                {this.props.user.nickname}
                             </td>
                         </tr>
                         <tr>
                             <td className="dashboard-table-key">Rolle</td>
                             <td className="dashboard-table-value">
-                                <span style={{color: "#"+(this.state.user.roleColor||0).toString(16).padStart(6, '0')}}>{this.state.user.role}</span>
+                                <span style={{color: "#"+(this.props.user.roleColor||0).toString(16).padStart(6, '0')}}>{this.props.user.role}</span>
                             </td>
                         </tr>
                         <tr>
                             <td className="dashboard-table-key">Coins</td>
                             <td className="dashboard-table-value">
-                                {this.state.user.coins}
+                                {this.props.user.coins}
                             </td>
                         </tr>
                     </tbody>
@@ -130,7 +115,7 @@ class Dashboard extends React.Component
         return (
             <div className="dashboard">
                 <GuildInfo/>
-                <UserInfo/>
+                <UserInfo user={this.props.user}/>
             </div>
         );
     }

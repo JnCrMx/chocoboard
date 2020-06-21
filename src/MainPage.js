@@ -185,6 +185,12 @@ class MainPage extends React.Component
         {
             this.updateUser();
         }
+        this.interval = setInterval(() => this.updateUser(), 5000);
+    }
+
+    componentWillUnmount()
+    {
+        clearInterval(this.interval);
     }
 
     render()
@@ -193,7 +199,7 @@ class MainPage extends React.Component
         switch(this.state.currentPage)
         {
             case 'dashboard':
-                page = <Dashboard key={this.context.guild}/>
+                page = <Dashboard key={this.context.guild} user={this.state.user}/>
                 break;
             case 'reminders':
                 page = <Reminders key={this.context.guild}/>
