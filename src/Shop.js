@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import { MyContext } from './context.js';
 import Config from './config.js';
-
 import { RoleSelector } from './Selectors.js'
+import { replaceEmojis } from './emoji.js'
 
 class ShopItemEditor extends React.Component
 {
@@ -159,9 +159,7 @@ class ShopItem extends React.Component
                     </tbody>
                 </table>
                 <p>
-                    <i>
-                        {this.props.data.description}
-                    </i>
+                    {replaceEmojis(this.props.data.description)}
                 </p>
                 <div class="shop-buttons">
                     <button

@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 
 import { MyContext } from './context.js';
 import Config from './config.js';
+import { replaceEmojis } from './emoji.js'
 
 class Poll extends React.Component
 {
@@ -31,7 +32,7 @@ class Poll extends React.Component
 
         return (
             <div className="poll-box">
-                {this.props.data.question}
+                <p>{replaceEmojis(this.props.data.question)}</p>
                 <div className="pie-chart">
                     <Chart options={options} series={series} type="pie" width="380"/>
                 </div>

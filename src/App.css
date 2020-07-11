@@ -323,3 +323,8 @@ a {
 .shop-item-editor-open {
 	display: flex;
 }
+
+.emoji {
+	height: 1em;
+	display: inline-block;
+}
