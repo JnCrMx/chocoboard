@@ -68,7 +68,7 @@ class Reminders extends React.Component
 
     update = () =>
     {
-        axios.get(Config.apiUrl + '/reminders/all?active='+this.state.active, 
+        axios.get(Config.apiUrl + '/reminders/all?type=all&active='+this.state.active, 
         {
             headers: {'Authorization': 'Bearer '+this.context.token}
         })
@@ -77,9 +77,9 @@ class Reminders extends React.Component
         });
     }
 
-    updateActive = () => 
+    updateActive = e => 
     {
-        this.setState({active: !this.state.active}, this.update);
+        this.setState({active: e.target.checked}, this.update);
     }
 
     render()
