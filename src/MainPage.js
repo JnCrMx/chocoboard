@@ -10,6 +10,7 @@ import Polls from './Polls.js';
 import Shop from './Shop.js';
 import Members from './Members.js';
 import Settings from './Settings.js';
+import Commands from './Commands.js';
 
 import dashboard from './dashboard.svg';
 import reminders from './reminders.svg';
@@ -18,6 +19,7 @@ import logout from './logout.svg';
 import members from './members.svg';
 import settings from './settings.svg';
 import shop from './shop.svg';
+import commands from './commands.svg';
 
 class Menu extends React.Component
 {
@@ -130,7 +132,7 @@ class GuildSelector extends React.Component
                 }
                 {this.state.open ?
                     <div className="menuEntry guild-entry guild-entry-top" onClick={this.props.logout}>
-                        <img src={logout} width="35vw"/>
+                        <img src={logout} width="35vw" alt=""/>
                         {this.props.extended?<div className="menuName">Abmelden</div>:null}
                     </div>
                     :null
@@ -216,6 +218,12 @@ class MainPage extends React.Component
             case 'settings':
                 page = <Settings key={this.context.guild}/>
                 break;
+            case 'commands':
+                page = <Commands key={this.context.guild}/>
+                break;
+            default:
+                page = <Dashboard key={this.context.guild} user={this.state.user}/>
+                break;
         }
 
         var menuEntries = [];
@@ -226,6 +234,7 @@ class MainPage extends React.Component
         if(this.state.user.operator)
         {
             menuEntries.push(<MenuEntry key="members" name="members" title="Mitglieder" icon={members}/>);
+            menuEntries.push(<MenuEntry key="commands" name="commands" title="Befehle" icon={commands}/>);
             menuEntries.push(<MenuEntry key="settings" name="settings" title="Einstellungen" icon={settings}/>);
         }
 
