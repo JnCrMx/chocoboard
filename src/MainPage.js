@@ -11,6 +11,7 @@ import Shop from './Shop.js';
 import Members from './Members.js';
 import Settings from './Settings.js';
 import Commands from './Commands.js';
+import Translations from './Translations.js';
 
 import dashboard from './dashboard.svg';
 import reminders from './reminders.svg';
@@ -20,6 +21,7 @@ import members from './members.svg';
 import settings from './settings.svg';
 import shop from './shop.svg';
 import commands from './commands.svg';
+import translations from './translations.svg';
 
 class Menu extends React.Component
 {
@@ -221,6 +223,9 @@ class MainPage extends React.Component
             case 'commands':
                 page = <Commands key={this.context.guild}/>
                 break;
+            case 'translations':
+                page = <Translations key={this.context.guild}/>
+                break;
             default:
                 page = <Dashboard key={this.context.guild} user={this.state.user}/>
                 break;
@@ -235,6 +240,7 @@ class MainPage extends React.Component
         {
             menuEntries.push(<MenuEntry key="members" name="members" title="Mitglieder" icon={members}/>);
             menuEntries.push(<MenuEntry key="commands" name="commands" title="Befehle" icon={commands}/>);
+            menuEntries.push(<MenuEntry key="translations" name="translations" title="Übersetzung" icon={translations}/>);
             menuEntries.push(<MenuEntry key="settings" name="settings" title="Einstellungen" icon={settings}/>);
         }
 

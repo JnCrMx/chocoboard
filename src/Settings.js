@@ -319,7 +319,7 @@ class Settings extends React.Component
 
         return (
             <div onClick={this.closePopup} id="settings">
-                <table style={{emptyCells: 'show'}}>
+                <table style={{emptyCells: 'show', height: 'min-content'}}>
                     <tbody>
                         <tr>
                             <td className="dashboard-table-key">Prefix</td>

@@ -134,9 +134,8 @@ a {
 }
 
 .dashboard-table-value {
-	display: flex;
-	align-items: center;
-	justify-content: right;
+	display: table-cell;
+	text-align: right;
 }
 
 .dashboard-table-key {
@@ -372,4 +371,37 @@ a {
 {
 	text-align: left;
 	white-space: pre-wrap;
+}
+
+#translations {
+	display: flex;
+	flex-direction: column;
+	width: inherit;
+	height: inherit;
+}
+
+#translations #table-div {
+	padding-top: 1em;
+	overflow-y: auto;
+	width: inherit;
+	height: 100%;
+}
+
+#translations table {
+	border-spacing: 0;
+	width: 99%;
+}
+
+#translations table td {
+	text-align: left;
+}
+
+#translations table textarea {
+	width: 99%;
+}
+
+#translations table td button {
+	background: none;
+	border: none;
+	font-size: 25px;
 }
