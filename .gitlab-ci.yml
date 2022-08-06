@@ -2,12 +2,11 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - deploy
 
-image:
-  name: node
-  entrypoint: ["/bin/bash"]
-
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
+  image:
+    name: node
+    entrypoint: ["/bin/bash"]
   script:
       - npm install
       - npm run build
