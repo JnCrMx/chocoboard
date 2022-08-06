@@ -1,6 +1,6 @@
 var config = 
 {
-   apiUrl: "https://jserver.kwgivnecuiphlqnj.myfritz.net/chocoapi"
+   apiUrl: "https://jcm.re/chocoapi"
 };
 
 if (process.env.NODE_ENV !== 'production') 

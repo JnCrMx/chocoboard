@@ -76,12 +76,14 @@ class Commands extends React.Component
 {
     state = {
         commands: [],
+        aliases: [],
 		settings: {}
 	}
 
     componentDidMount()
     {
         this.fetchCommands();
+        this.fetchAliases();
 		this.fetchSettings();
     }
 
@@ -94,6 +96,17 @@ class Commands extends React.Component
         .then(res => {
             this.setState({commands: res.data});
         });
+    }
+
+    fetchAliases = () =>
+    {
+        axios.get(Config.apiUrl + '/'+this.context.guild+'/guild/settings/command_aliases', 
+        {
+            headers: {'Authorization': 'Bearer '+this.context.token}
+        })
+        .then(res => {
+            this.setState({aliases: res.data});
+        });  
     }
 
 	fetchSettings = () =>
