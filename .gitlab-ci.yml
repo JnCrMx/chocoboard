@@ -6,7 +6,6 @@ build-job:       # This job runs in the build stage, which runs first.
   stage: build
   image:
     name: node
-    entrypoint: ["/bin/bash"]
   script:
       - npm install
       - npm run build
