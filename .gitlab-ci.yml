@@ -1,0 +1,23 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - deploy
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  script:
+      - npm install
+      - npm run build
+  artifacts:
+    paths:
+      - build/
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  script:
+      - echo "$SSH_KEY"
+      - echo "$SSH_KNOWN_HOSTS"
+      - chmod u=rw,og= "$SSH_KEY"
+      - scp -o UserKnownHostsFile="$SSH_KNOWN_HOSTS" -i "$SSH_KEY" -r build/* jcm@jcm.re:/srv/http/chocoboard
+  environment:
+    name: production
+    url: https://board.jcm.re
