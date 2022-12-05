@@ -1,0 +1,13 @@
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: build
+  image: node
+  commands:
+  - npm install
+  - npm run build
