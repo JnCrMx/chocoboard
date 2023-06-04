@@ -1,6 +1,6 @@
 var config = 
 {
-   apiUrl: "https://chocobot.jcm.re/api/v1"
+   apiUrl: "https://chocoboard.jcm.re/api/v1"
 };
 
 if (process.env.NODE_ENV !== 'production') 
