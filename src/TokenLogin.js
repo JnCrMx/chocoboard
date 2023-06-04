@@ -8,13 +8,11 @@ class TokenLogin extends React.Component
     tokenChange = event => 
     {
         var token = event.target.value;
-        var bodyFormData = new FormData();
-        bodyFormData.append("token", token)
         axios(
             {
                 method: 'post',
                 url: Config.apiUrl + '/token/check',
-                data: bodyFormData
+                data: token
             })
             .then(res =>
                 {

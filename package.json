@@ -2,7 +2,7 @@
   "name": "chocoboard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jserver.kwgivnecuiphlqnj.myfritz.net/chocoboard/",
+  "homepage": "https://chocoboard.jcm.re/",
   "dependencies": {
     "apexcharts": "^3.36.3",
     "axios": "^1.2.1",

@@ -1,11 +1,11 @@
 var config = 
 {
-   apiUrl: "https://jcm.re/chocoapi"
+   apiUrl: "https://chocobot.jcm.re/api/v1"
 };
 
 if (process.env.NODE_ENV !== 'production') 
 {
-   config.apiUrl = "http://localhost:3035"
+   config.apiUrl = "http://localhost:8080/api/v1"
 }
 
 export default config;
