@@ -9,5 +9,5 @@ steps:
 - name: build
   image: node
   commands:
-  - npm install
+  - npm ci
   - npm run build
