@@ -9,8 +9,8 @@ steps:
 - name: build
   image: node
   commands:
-  - npm ci
-  - npm run build
+  - yarn install --frozen-lockfile
+  - yarn run build
 - name: deploy
   image: appleboy/drone-scp
   settings:
