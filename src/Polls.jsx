@@ -4,7 +4,7 @@ import Chart from "react-apexcharts";
 
 import { MyContext } from './context.js';
 import Config from './config.js';
-import { replaceEmojis } from './emoji.js'
+import { replaceEmojis } from './emoji.jsx'
 
 class Poll extends React.Component
 {

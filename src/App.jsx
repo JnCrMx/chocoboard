@@ -2,8 +2,8 @@ import React from 'react';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 
-import TokenLogin from './TokenLogin.js';
-import MainPage from './MainPage.js';
+import TokenLogin from './TokenLogin.jsx';
+import MainPage from './MainPage.jsx';
 
 import { MyContext } from './context.js';
 

@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import { MyContext } from './context.js';
 import Config from './config.js';
-import { RoleSelector } from './Selectors.js'
-import { replaceEmojis } from './emoji.js'
+import { RoleSelector } from './Selectors.jsx'
+import { replaceEmojis } from './emoji.jsx'
 
 class ShopItemEditor extends React.Component
 {

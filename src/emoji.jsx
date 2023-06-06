@@ -1,5 +1,5 @@
 import React from 'react';
-const reactStringReplace = require('react-string-replace')
+import reactStringReplace from 'react-string-replace';
 
 export const replaceEmojis = function(string)
 {

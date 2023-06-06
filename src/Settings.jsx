@@ -4,7 +4,7 @@ import axios from 'axios';
 import { MyContext } from './context.js';
 import Config from './config.js';
 
-import { ChannelSelector, RoleSelector } from './Selectors.js';
+import { ChannelSelector, RoleSelector } from './Selectors.jsx';
 
 class Operators extends React.Component
 {

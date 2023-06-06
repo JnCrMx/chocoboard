@@ -4,24 +4,24 @@ import axios from 'axios';
 import { MyContext } from './context.js';
 import Config from './config.js';
 
-import Dashboard from './Dashboard.js';
-import Reminders from './Reminders.js';
-import Polls from './Polls.js';
-import Shop from './Shop.js';
-import Members from './Members.js';
-import Settings from './Settings.js';
-import Commands from './Commands.js';
-import Translations from './Translations.js';
+import Dashboard from './Dashboard.jsx';
+import Reminders from './Reminders.jsx';
+import Polls from './Polls.jsx';
+import Shop from './Shop.jsx';
+import Members from './Members.jsx';
+import Settings from './Settings.jsx';
+import Commands from './Commands.jsx';
+import Translations from './Translations.jsx';
 
-import dashboard from './dashboard.svg';
-import reminders from './reminders.svg';
-import polls from './polls.svg';
-import logout from './logout.svg';
-import members from './members.svg';
-import settings from './settings.svg';
-import shop from './shop.svg';
-import commands from './commands.svg';
-import translations from './translations.svg';
+import dashboard from './assets/dashboard.svg';
+import reminders from './assets/reminders.svg';
+import polls from './assets/polls.svg';
+import logout from './assets/logout.svg';
+import members from './assets/members.svg';
+import settings from './assets/settings.svg';
+import shop from './assets/shop.svg';
+import commands from './assets/commands.svg';
+import translations from './assets/translations.svg';
 
 class Menu extends React.Component
 {
@@ -79,7 +79,7 @@ class GuildEntry extends React.Component
     {
         return (
             <div className="menuEntry guild-entry" onClick={this.props.onClick||this.changeGuild}>
-                <img src={this.props.data.iconUrl} width="35vw" height="35vw" alt="?"/>
+                <img src={this.props.data.icon_url} width="35vw" height="35vw" alt="?"/>
                 {this.props.extended?<div className="menuName">{this.props.data.name}</div>:null}
             </div>
         );
