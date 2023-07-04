@@ -79,7 +79,7 @@ class GuildEntry extends React.Component
     {
         return (
             <div className="menuEntry guild-entry" onClick={this.props.onClick||this.changeGuild}>
-                <img src={this.props.data.icon_url} width="35vw" height="35vw" alt="?"/>
+                <img src={this.props.data.iconUrl} width="35vw" height="35vw" alt="?"/>
                 {this.props.extended?<div className="menuName">{this.props.data.name}</div>:null}
             </div>
         );
