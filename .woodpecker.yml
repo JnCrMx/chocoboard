@@ -13,7 +13,7 @@ steps:
         from_secret: ssh_password
       port: 2222
       target: /config/data/chocoboard
-      source: build/
+      source: dist/
       strip_components: 1
     when:
       - environment: production
